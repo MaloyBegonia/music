@@ -8,7 +8,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "it.vfsfitvnm.vimusic"
+        applicationId = "com.maloy.music"
         minSdk = 21
         targetSdk = 33
         versionCode = 20
@@ -22,7 +22,7 @@ android {
         }
     }
 
-    namespace = "it.vfsfitvnm.vimusic"
+    namespace = "com.maloy.music"
 
     buildTypes {
         debug {
@@ -33,7 +33,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            manifestPlaceholders["appName"] = "ViMusic"
+            manifestPlaceholders["appName"] = "Music"
             signingConfig = signingConfigs.getByName("debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

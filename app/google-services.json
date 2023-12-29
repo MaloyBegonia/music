@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "349156872695",
+    "project_id": "music-officialst",
+    "storage_bucket": "music-officialst.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349156872695:android:61a6b1fee64e1ddd265ef2",
+        "android_client_info": {
+          "package_name": "com.maloy.music"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsIMnvJBwC9dAWgpfq2BpzDPoRW2EIM_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
