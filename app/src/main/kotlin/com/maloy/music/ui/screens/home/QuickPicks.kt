@@ -249,7 +249,7 @@ fun QuickPicks(
 
                 related.albums?.let { albums ->
                     BasicText(
-                        text = "Related albums",
+                        text = stringResource(R.string.related_albums),
                         style = typography.m.semiBold,
                         modifier = sectionTextModifier
                     )

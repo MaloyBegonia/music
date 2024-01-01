@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.ui.res.stringResource
 import com.maloy.compose.persist.PersistMapCleanup
 import com.maloy.compose.routing.RouteHandler
 import com.maloy.music.R
@@ -28,7 +29,7 @@ fun LocalPlaylistScreen(playlistId: Long) {
                 tabIndex = 0,
                 onTabChanged = { },
                 tabColumnContent = { Item ->
-                    Item(0, "Songs", R.drawable.musical_notes)
+                    Item(0, stringResource(R.string.songs), R.drawable.musical_notes)
                 }
             ) { currentTabIndex ->
                 saveableStateHolder.SaveableStateProvider(currentTabIndex) {

@@ -70,7 +70,7 @@ fun HomePlaylists(
 
     if (isCreatingANewPlaylist) {
         TextFieldDialog(
-            hintText = "Enter the playlist name",
+            hintText = stringResource(R.string.enter_the_playlist_name),
             onDismiss = {
                 isCreatingANewPlaylist = false
             },

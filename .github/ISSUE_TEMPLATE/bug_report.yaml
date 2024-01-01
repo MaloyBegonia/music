@@ -63,7 +63,7 @@ body:
     attributes:
       label: Music version
       placeholder: |
-        Example: "0.5.4"
+        Example: "1.7"
     validations:
       required: true
 

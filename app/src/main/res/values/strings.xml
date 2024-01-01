@@ -183,4 +183,6 @@
     <string name="defaultfoldername">Default</string>
     <string name="No">No</string>
     <string name="Stop">Stop</string>
+    <string name="On">On</string>
+    <string name="Off">Off</string>
 </resources>

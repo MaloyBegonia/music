@@ -41,6 +41,7 @@ import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -48,6 +49,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.maloy.music.R
 import com.maloy.music.ui.styling.LocalAppearance
 import com.maloy.music.utils.center
 import com.maloy.music.utils.drawCircle
@@ -62,13 +64,13 @@ fun TextFieldDialog(
     onDismiss: () -> Unit,
     onDone: (String) -> Unit,
     modifier: Modifier = Modifier,
-    cancelText: String = "Cancel",
-    doneText: String = "Done",
+    cancelText: String = stringResource(R.string.cancel),
+    doneText: String = stringResource(R.string.done),
     initialTextInput: String = "",
     singleLine: Boolean = true,
     maxLines: Int = 1,
     onCancel: () -> Unit = onDismiss,
-    isTextInputValid: (String) -> Boolean = { it.isNotEmpty() }
+    isTextInputValid: (String) -> Boolean = { it.isNotEmpty() },
 ) {
     val focusRequester = remember {
         FocusRequester()
@@ -167,9 +169,9 @@ fun ConfirmationDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit,
     modifier: Modifier = Modifier,
-    cancelText: String = "Cancel",
-    confirmText: String = "Confirm",
-    onCancel: () -> Unit = onDismiss
+    cancelText: String = stringResource(R.string.cancel),
+    confirmText: String = stringResource(R.string.confirm),
+    onCancel: () -> Unit = onDismiss,
 ) {
     val (_, typography) = LocalAppearance.current
 
@@ -324,7 +326,7 @@ inline fun <T> ValueSelectorDialog(
                     .padding(end = 24.dp)
             ) {
                 DialogTextButton(
-                    text = "Cancel",
+                    text = stringResource(R.string.cancel),
                     onClick = onDismiss,
                     modifier = Modifier
                 )
