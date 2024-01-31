@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +54,7 @@ import com.maloy.music.ui.styling.px
 import com.maloy.music.utils.playlistSortByKey
 import com.maloy.music.utils.playlistSortOrderKey
 import com.maloy.music.utils.rememberPreference
+import com.maloy.music.ui.components.themed.HeaderInfo
 
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
@@ -118,6 +120,11 @@ fun HomePlaylists(
         ) {
             item(key = "header", contentType = 0, span = { GridItemSpan(maxLineSpan) }) {
                 Header(title = stringResource(R.string.playlists)) {
+                    HeaderInfo(
+                        title = "${items.size}",
+                        icon = painterResource(R.drawable.playlist),
+                        spacer = 0
+                    )
                     SecondaryTextButton(
                         text = stringResource(R.string.new_playlist),
                         onClick = { isCreatingANewPlaylist = true }

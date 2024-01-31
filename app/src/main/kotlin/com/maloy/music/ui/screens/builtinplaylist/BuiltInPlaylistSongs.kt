@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.maloy.compose.persist.persistList
@@ -32,6 +33,7 @@ import com.maloy.music.models.SongWithContentLength
 import com.maloy.music.ui.components.LocalMenuState
 import com.maloy.music.ui.components.themed.FloatingActionsContainerWithScrollToTop
 import com.maloy.music.ui.components.themed.Header
+import com.maloy.music.ui.components.themed.HeaderInfo
 import com.maloy.music.ui.components.themed.InHistoryMediaItemMenu
 import com.maloy.music.ui.components.themed.NonQueuedMediaItemMenu
 import com.maloy.music.ui.components.themed.SecondaryTextButton
@@ -101,6 +103,11 @@ fun BuiltInPlaylistSongs(builtInPlaylist: BuiltInPlaylist) {
                     modifier = Modifier
                         .padding(bottom = 8.dp)
                 ) {
+                    HeaderInfo(
+                        title = "${songs.size}",
+                        icon = painterResource(R.drawable.musical_notes),
+                        spacer = 0
+                    )
                     SecondaryTextButton(
                         text = stringResource(R.string.enqueue),
                         enabled = songs.isNotEmpty(),
