@@ -87,10 +87,15 @@ dependencies {
     implementation(libs.exoplayer)
 
     implementation(libs.room)
+    implementation("androidx.appcompat:appcompat:1.6.1")
     kapt(libs.room.compiler)
 
     implementation(projects.innertube)
     implementation(projects.kugou)
 
     coreLibraryDesugaring(libs.desugaring)
+
+    // For loading and tinting drawables on older versions of the platform
+
+    implementation("com.github.therealbush:translator:1.0.2")
 }

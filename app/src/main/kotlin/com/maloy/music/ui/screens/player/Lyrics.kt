@@ -1,5 +1,6 @@
 package com.maloy.music.ui.screens.player
 
+//import com.google.mlkit.nl.translate.TranslateLanguage
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.C
 import androidx.media3.common.MediaMetadata
+import androidx.media3.common.util.UnstableApi
 import com.valentinilk.shimmer.shimmer
 import com.maloy.innertube.Innertube
 import com.maloy.innertube.models.bodies.NextBody
@@ -60,6 +62,7 @@ import com.maloy.music.R
 import com.maloy.music.models.Lyrics
 import com.maloy.music.query
 import com.maloy.music.ui.components.LocalMenuState
+import com.maloy.music.ui.components.themed.IconButton
 import com.maloy.music.ui.components.themed.Menu
 import com.maloy.music.ui.components.themed.MenuEntry
 import com.maloy.music.ui.components.themed.TextFieldDialog
@@ -71,6 +74,7 @@ import com.maloy.music.ui.styling.onOverlayShimmer
 import com.maloy.music.utils.SynchronizedLyrics
 import com.maloy.music.utils.center
 import com.maloy.music.utils.color
+import com.maloy.music.utils.getHttpClient
 import com.maloy.music.utils.isShowingSynchronizedLyricsKey
 import com.maloy.music.utils.medium
 import com.maloy.music.utils.rememberPreference
@@ -80,7 +84,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
+import me.bush.translator.Language
+import me.bush.translator.Translator
+import java.util.Locale
 
+
+@UnstableApi
 @Composable
 fun Lyrics(
     mediaId: String,
@@ -108,6 +117,10 @@ fun Lyrics(
             mutableStateOf(false)
         }
 
+        var showPlaceholder by remember {
+            mutableStateOf(false)
+        }
+
         var lyrics by remember {
             mutableStateOf<Lyrics?>(null)
         }
@@ -118,8 +131,36 @@ fun Lyrics(
             mutableStateOf(false)
         }
 
+        //var languageApp  by rememberPreference(languageAppKey, Languages.English)
+        //val systemLocale = LocaleListCompat.getDefault().get(0).toString()
+        //val systemLangCode = AppCompatDelegate.getApplicationLocales().get(0).toString()
+        val systemLocale = Locale.getDefault().getLanguage()
+
+        val languageDestination = when (systemLocale) {
+            "ru" -> Language.RUSSIAN
+            "it" -> Language.ITALIAN
+            "cs" -> Language.CZECH
+            "de" -> Language.GERMAN
+            "es" -> Language.SPANISH
+            "fr" -> Language.FRENCH
+            "ro" -> Language.ROMANIAN
+            "tr" -> Language.TURKISH
+            "pl" -> Language.POLISH
+            else -> {
+                Language.ENGLISH
+            }
+        }
+
+        var translateEnabled by remember {
+            mutableStateOf(false)
+        }
+
+        val translator = Translator(getHttpClient())
+
+
         LaunchedEffect(mediaId, isShowingSynchronizedLyrics) {
             withContext(Dispatchers.IO) {
+
                 Database.lyrics(mediaId).collect {
                     if (isShowingSynchronizedLyrics && it?.synced == null) {
                         val mediaMetadata = mediaMetadataProvider()
@@ -145,6 +186,7 @@ fun Lyrics(
                                     fixed = it?.fixed,
                                     synced = syncedLyrics?.value ?: ""
                                 )
+
                             )
                         }?.onFailure {
                             isError = true
@@ -165,8 +207,11 @@ fun Lyrics(
                         lyrics = it
                     }
                 }
+
             }
+
         }
+
 
         if (isEditing) {
             TextFieldDialog(
@@ -210,6 +255,7 @@ fun Lyrics(
                 }
                 .fillMaxSize()
                 .background(Color.Black.copy(0.8f))
+
         ) {
             AnimatedVisibility(
                 visible = isError && text == null,
@@ -263,6 +309,7 @@ fun Lyrics(
                         }
                     }
 
+
                     val lazyListState = rememberLazyListState(
                         synchronizedLyrics.index,
                         with(density) { size.roundToPx() } / 6)
@@ -290,18 +337,57 @@ fun Lyrics(
                             .verticalFadingEdge()
                     ) {
                         itemsIndexed(items = synchronizedLyrics.sentences) { index, sentence ->
+                            var translatedText by remember { mutableStateOf("") }
+                            if (translateEnabled == true) {
+                                LaunchedEffect(Unit) {
+                                    val result = withContext(Dispatchers.IO) {
+                                        try {
+                                            translator.translate(
+                                                sentence.second,
+                                                languageDestination,
+                                                Language.AUTO
+                                            ).translatedText
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+                                    translatedText =
+                                        if (result.toString() == "kotlin.Unit") "" else result.toString()
+                                    showPlaceholder = false
+                                }
+                            } else translatedText = sentence.second
                             BasicText(
-                                text = sentence.second,
-                                style = typography.xs.center.medium.color(if (index == synchronizedLyrics.index) PureBlackColorPalette.text else PureBlackColorPalette.textDisabled),
+                                text = translatedText,
+                                style = typography.m.center.medium.color(if (index == synchronizedLyrics.index) PureBlackColorPalette.text else PureBlackColorPalette.textDisabled),
                                 modifier = Modifier
                                     .padding(vertical = 4.dp, horizontal = 32.dp)
                             )
                         }
                     }
                 } else {
+                    var translatedText by remember { mutableStateOf("") }
+                    if (translateEnabled == true) {
+                        LaunchedEffect(Unit) {
+                            val result = withContext(Dispatchers.IO) {
+                                try {
+                                    translator.translate(
+                                        text,
+                                        languageDestination,
+                                        Language.AUTO
+                                    ).translatedText
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                            translatedText =
+                                if (result.toString() == "kotlin.Unit") "" else result.toString()
+                            showPlaceholder = false
+                        }
+                    } else translatedText = text
+
                     BasicText(
-                        text = text,
-                        style = typography.xs.center.medium.color(PureBlackColorPalette.text),
+                        text = translatedText,
+                        style = typography.m.center.medium.color(PureBlackColorPalette.text),
                         modifier = Modifier
                             .verticalFadingEdge()
                             .verticalScroll(rememberScrollState())
@@ -311,7 +397,7 @@ fun Lyrics(
                 }
             }
 
-            if (text == null && !isError) {
+            if ((text == null && !isError) || showPlaceholder) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -321,14 +407,28 @@ fun Lyrics(
                         TextPlaceholder(
                             color = colorPalette.onOverlayShimmer,
                             modifier = Modifier
-                                .alpha(1f - it * 0.2f)
+                                .alpha(1f - it * 0.1f)
                         )
                     }
                 }
             }
 
+            IconButton(
+                icon = R.drawable.translate,
+                color = if (translateEnabled == true) colorPalette.text else colorPalette.textDisabled,
+                enabled = true,
+                onClick = {
+                    translateEnabled = !translateEnabled
+                    if (!translateEnabled) showPlaceholder = false else showPlaceholder = true
+                },
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .align(Alignment.BottomStart)
+                    .size(24.dp)
+            )
+
             Image(
-                painter = painterResource(R.drawable.ellipsis_horizontal),
+                painter = painterResource(R.drawable.ellipsis_vertical),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(DefaultDarkColorPalette.text),
                 modifier = Modifier

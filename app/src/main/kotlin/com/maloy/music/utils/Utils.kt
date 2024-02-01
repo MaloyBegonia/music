@@ -1,6 +1,7 @@
 package com.maloy.music.utils
 
 import android.net.Uri
+import android.net.http.HttpResponseCache.install
 import android.os.Build
 import android.text.format.DateUtils
 import androidx.core.net.toUri
@@ -12,6 +13,8 @@ import com.maloy.innertube.models.bodies.ContinuationBody
 import com.maloy.innertube.requests.playlistPage
 import com.maloy.innertube.utils.plus
 import com.maloy.music.models.Song
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.UserAgent
 
 val Innertube.SongItem.asMediaItem: MediaItem
     get() = MediaItem.Builder()
@@ -105,6 +108,12 @@ suspend fun Result<Innertube.PlaylistOrAlbumPage>.completed(): Result<Innertube.
     }
 
     return Result.success(playlistPage)
+}
+
+fun getHttpClient() = HttpClient() {
+    install(UserAgent) {
+        agent = "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0"
+    }
 }
 
 inline val isAtLeastAndroid6
