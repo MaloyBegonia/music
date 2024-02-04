@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cancel">Отмена</string>
-    <string name="done">Сделано</string>
+    <string name="done">Готово</string>
     <string name="hidesong">Вы действительно хотите скрыть эту песню? Время воспроизведения и кэш будут удалены.\nЭто действие необратимо.</string>
     <string name="new_playlist">Новый плейлист</string>
     <string name="start_radio">Запустить радио</string>
@@ -27,9 +27,9 @@
     <string name="quick_picks">Быстрый выбор</string>
     <string name="songs">Треки</string>
     <string name="other_versions">Другие версии</string>
-    <string name="album_no_alternative_version">Этот альбом не\'альтернативной версии нет</string>
+    <string name="album_no_alternative_version">На этот альбом альтернативной версии нет</string>
     <string name="enqueue">Очередь</string>
-    <string name="shuffle">Перетасовать</string>
+    <string name="shuffle">Перемешать</string>
     <string name="view_all">Посмотреть всеl</string>
     <string name="from_wikipedia_cca">Из Википедии с указанием авторства Creative Commons CC-BY-SA 3.0.</string>
     <string name="overview">Обзор</string>
@@ -141,7 +141,7 @@
     <string name="left">Осталось %1$s</string>
     <string name="set">Установить</string>
     <string name="play_next">Играть дальше</string>
-    <string name="confirm">Подтверждать</string>
+    <string name="confirm">Подтвердить</string>
     <string name="show">Показывать</string>
     <string name="unsynchronized_lyrics">несинхронизированные тексты треков</string>
     <string name="synchronized_lyrics">синхронизированные тексты треков</string>
