@@ -1,5 +1,6 @@
 package com.maloy.innertube.models
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable

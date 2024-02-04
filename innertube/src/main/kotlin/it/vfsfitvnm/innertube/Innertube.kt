@@ -8,15 +8,28 @@ import io.ktor.client.plugins.compression.brotli
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.headers
+import io.ktor.client.request.parameter
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
+import io.ktor.http.userAgent
 import io.ktor.serialization.kotlinx.json.json
+import com.maloy.innertube.models.MusicNavigationButtonRenderer
 import com.maloy.innertube.models.NavigationEndpoint
 import com.maloy.innertube.models.Runs
 import com.maloy.innertube.models.Thumbnail
+import com.maloy.innertube.models.YouTubeClient
+import com.maloy.innertube.utils.ProxyPreferences
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import java.net.InetSocketAddress
+import java.net.Proxy
+import java.util.Locale
 
 object Innertube {
     val client = HttpClient(OkHttp) {
@@ -37,6 +50,18 @@ object Innertube {
             brotli()
         }
 
+        ProxyPreferences.preference?.let {
+            engine {
+                proxy = Proxy(
+                    it.proxyMode,
+                    InetSocketAddress(
+                        it.proxyHost,
+                        it.proxyPort
+                    )
+                )
+            }
+        }
+
         defaultRequest {
             url(scheme = "https", host ="music.youtube.com") {
                 headers.append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
@@ -45,6 +70,17 @@ object Innertube {
             }
         }
     }
+
+    var proxy: Proxy? = null
+        set(value) {
+            field = value
+            client.close()
+            client
+        }
+
+
+    //var localeHl =  "en"
+    //var localeHl =  Locale.getDefault().toLanguageTag() //"en"
 
     internal const val browse = "/youtubei/v1/browse"
     internal const val next = "/youtubei/v1/next"
@@ -59,6 +95,8 @@ object Innertube {
 
     internal fun HttpRequestBuilder.mask(value: String = "*") =
         header("X-Goog-FieldMask", value)
+
+
 
     data class Info<T : NavigationEndpoint.Endpoint>(
         val name: String?,
@@ -195,9 +233,42 @@ object Innertube {
         val albums: List<AlbumItem>? = null,
         val artists: List<ArtistItem>? = null,
     )
+    data class RelatedSongs(
+        val songs: List<SongItem>? = null
+    )
+
+    data class DiscoverPage(
+        val newReleaseAlbums: List<AlbumItem>,
+        val moods: List<Mood.Item>
+    )
+
+    data class DiscoverPageAlbums(
+        val newReleaseAlbums: List<AlbumItem>
+
+    )
+
+    data class Mood(
+        val title: String,
+        val items: List<Item>
+    ) {
+        data class Item(
+            val title: String,
+            val stripeColor: Long,
+            val endpoint: NavigationEndpoint.Endpoint.Browse
+        )
+    }
+
+    fun MusicNavigationButtonRenderer.toMood(): Mood.Item? {
+        return Mood.Item(
+            title = buttonText.runs.firstOrNull()?.text ?: return null,
+            stripeColor = solid?.leftStripeColor ?: return null,
+            endpoint = clickCommand.browseEndpoint ?: return null
+        )
+    }
+
 
     data class ItemsPage<T : Item>(
-        val items: List<T>?,
+        var items: List<T>?,
         val continuation: String?
     )
 }
