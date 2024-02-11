@@ -8,7 +8,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.maloy.music"
+        applicationId = "com.maloy.muzza"
         minSdk = 21
         targetSdk = 33
         versionCode = 20
@@ -22,7 +22,7 @@ android {
         }
     }
 
-    namespace = "com.maloy.music"
+    namespace = "com.maloy.muzza"
 
     buildTypes {
         debug {
@@ -33,7 +33,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            manifestPlaceholders["appName"] = "Music"
+            manifestPlaceholders["appName"] = "Muzza"
             signingConfig = signingConfigs.getByName("debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

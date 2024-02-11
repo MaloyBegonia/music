@@ -26,13 +26,13 @@
         android:label="${appName}"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.Music.NoActionBar">
+        android:theme="@style/Theme.Muzza.NoActionBar">
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.Music.NoActionBar"
+            android:theme="@style/Theme.Muzza.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
             <intent-filter>

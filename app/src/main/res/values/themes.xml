@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.Music" parent="@android:style/Theme.Holo.NoActionBar">
+    <style name="Theme.Muzza" parent="@android:style/Theme.Holo.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -12,7 +12,7 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Music.NoActionBar" parent="Theme.Music">
+    <style name="Theme.Muzza.NoActionBar" parent="Theme.Muzza">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>

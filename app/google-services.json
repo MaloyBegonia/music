@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "349156872695",
-    "project_id": "music-officialst",
-    "storage_bucket": "music-officialst.appspot.com"
+    "project_number": "358995951579",
+    "project_id": "music-release",
+    "storage_bucket": "music-release.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:349156872695:android:61a6b1fee64e1ddd265ef2",
+        "mobilesdk_app_id": "1:358995951579:android:c59536affb6990ed8db1fe",
         "android_client_info": {
-          "package_name": "com.maloy.music"
+          "package_name": "com.maloy.muzza"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCsIMnvJBwC9dAWgpfq2BpzDPoRW2EIM_o"
+          "current_key": "AIzaSyCYfZiyuCaeHkeea7-ZMKeu3H515Op5sTE"
         }
       ],
       "services": {

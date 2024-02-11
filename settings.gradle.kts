@@ -58,7 +58,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Music"
+rootProject.name = "Muzza"
 include(":app")
 include(":compose-routing")
 include(":compose-reordering")
