@@ -125,7 +125,7 @@ fun OtherSettings() {
         SettingsEntry(
             title = stringResource(R.string.clear_search_history),
             text = if (queriesCount > 0) {
-                "Delete $queriesCount search queries"
+                "${stringResource(R.string.delete)} " + queriesCount + stringResource(R.string.search_queries)
             } else {
                 stringResource(R.string.history_is_empty)
             },

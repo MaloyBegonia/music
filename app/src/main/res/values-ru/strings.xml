@@ -12,8 +12,8 @@
     <string name="go_to_album">Перейти в альбом</string>
     <string name="remove_from_queue">Удалить из очереди</string>
     <string name="remove_from_playlist">Удалить из плейлиста</string>
-    <string name="hide">Скрывать</string>
-    <string name="hide_from_quick_picks">Скрыть от \"Quick picks\"</string>
+    <string name="hide">Скрыть</string>
+    <string name="hide_from_quick_picks">Скрыть от \"Быстрого выбора\"</string>
     <string name="related_albums">Похожие альбомы</string>
     <string name="similar_artists">Похожие артисты</string>
     <string name="playlists_you_might_like">Плейлисты, которые могут вам понравиться</string>
@@ -25,7 +25,7 @@
     <string name="favorites">Избранное</string>
     <string name="offline">Не в сети</string>
     <string name="quick_picks">Быстрый выбор</string>
-    <string name="songs">Треки</string>
+    <string name="songs">Песни</string>
     <string name="other_versions">Другие версии</string>
     <string name="album_no_alternative_version">На этот альбом альтернативной версии нет</string>
     <string name="enqueue">Очередь</string>
@@ -42,8 +42,8 @@
     <string name="rename">Переименовать</string>
     <string name="delete">Удалить</string>
     <string name="enter_the_lyrics">Введите текст</string>
-    <string name="edit_lyrics">Редактировать тексты треков</string>
-    <string name="search_lyrics_online">Искать тексты треков в Интернете</string>
+    <string name="edit_lyrics">Редактировать текст песни</string>
+    <string name="search_lyrics_online">Искать текст песни в Интернете</string>
     <string name="fetch_lyrics_again">Получить текст еще раз</string>
     <string name="queue_loop">"Цикл очереди "</string>
     <string name="id">Идентификатор</string>
@@ -146,7 +146,7 @@
     <string name="unsynchronized_lyrics">несинхронизированные тексты треков</string>
     <string name="synchronized_lyrics">синхронизированные тексты треков</string>
     <string name="provided_by">Предоставлено</string>
-    <string name="cleanup">УБОРКА</string>
+    <string name="cleanup">ЧИСТКА</string>
     <string name="delete_playback_events">Удалить события воспроизведения %1$s</string>
     <string name="existing_data_will_be_overwritten">Существующие данные будут перезаписаны.\n%1$s автоматически закроется после восстановления базы данных.</string>
     <string name="on_queue">в очереди</string>
@@ -173,4 +173,5 @@
     <string name="quick_pics_and_tips">БЫСТРЫЕ ФОТО И СОВЕТЫ</string>
     <string name="No">Нет</string>
     <string name="Stop">остановить</string>
+    <string name="search_queries">" поисковые запросы"</string>
 </resources>

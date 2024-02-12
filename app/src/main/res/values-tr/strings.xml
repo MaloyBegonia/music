@@ -171,4 +171,5 @@
     <string name="i18_none">Hiçbiri</string>
     <string name="i18_light">Işıkt</string>
     <string name="i18_heavy">Ağır</string>
+    <string name="search_queries">" arama sorguları"</string>
 </resources>

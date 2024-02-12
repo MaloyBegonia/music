@@ -2,7 +2,7 @@
 <resources>
     <string name="cancel">Відміна</string>
     <string name="done">Готово</string>
-    <string name="hidesong">Ви дійсно хочете сховати цю пісню? Час відтворення і кеш будуть видалені.\nЭто действие необратимо.</string>
+    <string name="hidesong">Ви дійсно хочете сховати цю пісню? Час відтворення і кеш будуть видалені.\n ця дія незворотня.</string>
     <string name="new_playlist">Новий плейлист</string>
     <string name="start_radio">Запустити радіо</string>
     <string name="equalizer">Еквалайзер</string>
@@ -25,9 +25,9 @@
     <string name="favorites">Обране</string>
     <string name="offline">Не в мережі</string>
     <string name="quick_picks">Швидкий вибір</string>
-    <string name="songs">Треки</string>
+    <string name="songs">Песни</string>
     <string name="other_versions">Другі версії</string>
-    <string name="album_no_alternative_version">На цей альбом альтернативнох версії немає</string>
+    <string name="album_no_alternative_version">На цей альбом альтернативної версії немає</string>
     <string name="enqueue">Черга</string>
     <string name="shuffle">Перемішати</string>
     <string name="view_all">Подивитися все</string>
@@ -42,8 +42,8 @@
     <string name="rename">Перейменувати</string>
     <string name="delete">Видалити</string>
     <string name="enter_the_lyrics">Введіть текст</string>
-    <string name="edit_lyrics">Редактувати тексти треків</string>
-    <string name="search_lyrics_online">Шукати тексти треків в інтернеті</string>
+    <string name="edit_lyrics">Редактувати тексти пісні</string>
+    <string name="search_lyrics_online">Шукати текст пісні в інтернеті</string>
     <string name="fetch_lyrics_again">Получити текст ще раз</string>
     <string name="queue_loop">"Цикл черги "</string>
     <string name="id">Індикатор</string>
@@ -66,7 +66,7 @@
     <string name="appearance">Появлення</string>
     <string name="colors">Кольори</string>
     <string name="theme">Тема</string>
-    <string name="theme_mode">Тематичний режим</string>
+    <string name="theme_mode">Режим теми</string>
     <string name="shapes">Форми</string>
     <string name="thumbnail_roundness">Округленість мініатюр</string>
     <string name="text">ТЕКСТ</string>
@@ -94,12 +94,12 @@
     <string name="import_the_database">Відновіть базу даних з зовнішнього сховища</string>
     <string name="other">Інше</string>
     <string name="android_auto">АНДРОІД АВТО</string>
-    <string name="enable_unknown_sources">Не забудьте включити «Невідомі джерела» в настройках розробітника Android Auto.</string>
+    <string name="enable_unknown_sources">Не забудьте включити «Невідомі джерела» в настройках розробника Android Auto.</string>
     <string name="now_playing">Зараз грає...</string>
     <string name="android_auto_1">Андроід Авто</string>
     <string name="close_background_player">Закрити фоновий програвач</string>
     <string name="when_app_swipe_out_from_task_manager">Коли додаток змахує з диспетчера задач</string>
-	<string name="next_playing">Дальше грає...</string>
+    <string name="next_playing">Дальше грає...</string>
     <string name="tips">Підказки</string>
     <string name="is_min_list_time_for_tips_or_quick_pics">Це мінімальний час прослуховування, щоб включити пісню в список можливих підказок або швидких фотографій.</string>
     <string name="min_listening_time">Мінімальний час прослуховування</string>
@@ -123,7 +123,9 @@
     <string name="disable_background_restrictions">Виключити фонові обмеження</string>
     <string name="invincible_service">Eroot serv</string>
     <string name="turning_off_battery_optimizations_is_not_enough">Коли відключення оптимізації батареї недостатньо</string>
-    <string name="player_audio"><![CDATA[Player & Audio]]></string>
+    <string name="player_audio">
+<![CDATA[ Player & Audio ]]>
+</string>
     <string name="player">Плеєр</string>
     <string name="persistent_queue">Постійна черга</string>
     <string name="save_and_restore_playing_songs">Збереження і відновлення виконаних треків</string>
@@ -146,7 +148,7 @@
     <string name="unsynchronized_lyrics">несинхронізоварі тексти треків</string>
     <string name="synchronized_lyrics">синхронизовані тексти треків</string>
     <string name="provided_by">Представлено</string>
-    <string name="cleanup">Чистка</string>
+    <string name="cleanup">ЧИСТКА</string>
     <string name="delete_playback_events">Видалити події виконання %1$s</string>
     <string name="existing_data_will_be_overwritten">Існуючі дані будуть перезаписані.\n%1$s автоматично закриється після відновлення бази даних.</string>
     <string name="on_queue">в черзі</string>
@@ -161,7 +163,7 @@
     <string name="i18_none">Звичайний</string>
     <string name="i18_light">Середній</string>
     <string name="i18_heavy">Великий</string>
-    <string name="aboutdev">Muzza v1.8 Розробник @MaloyBegonia</string>
+    <string name="aboutdev">Muzza v1.9 Розробник @MaloyBegonia</string>
     <string name="git">GitHub</string>
     <string name="telegramchannel">Телеграм канал</string>
     <string name="donate2">Донат</string>
@@ -173,4 +175,5 @@
     <string name="quick_pics_and_tips">ШВИДКІ ФОТО І ПІДКАЗКИ</string>
     <string name="No">НІ</string>
     <string name="Stop">зупинити</string>
+    <string name="search_queries">" пошукові запити"</string>
 </resources>

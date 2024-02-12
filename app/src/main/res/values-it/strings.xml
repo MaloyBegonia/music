@@ -171,4 +171,5 @@
     <string name="i18_none">Nessuno</string>
     <string name="i18_light">Leggero</string>
     <string name="i18_heavy">Pesante</string>
+    <string name="search_queries">" ricerche"</string>
 </resources>

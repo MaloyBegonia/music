@@ -171,4 +171,5 @@
   <string name="i18_none">None</string>
   <string name="i18_light">Light</string>
   <string name="i18_heavy">Heavy</string>
+  <string name="search_queries">" vyhledávací dotazy"</string>
 </resources>
