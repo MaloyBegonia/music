@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.C
@@ -42,9 +43,10 @@ import com.maloy.muzza.models.Song
 import com.maloy.muzza.query
 import com.maloy.muzza.ui.components.SeekBar
 import com.maloy.muzza.ui.components.themed.IconButton
+import com.maloy.muzza.ui.screens.albumRoute
+import com.maloy.muzza.ui.screens.artistRoute
 import com.maloy.muzza.ui.styling.LocalAppearance
 import com.maloy.muzza.ui.styling.favoritesIcon
-import com.maloy.muzza.utils.bold
 import com.maloy.muzza.utils.forceSeekToNext
 import com.maloy.muzza.utils.forceSeekToPrevious
 import com.maloy.muzza.utils.formatAsDuration
@@ -59,6 +61,8 @@ fun Controls(
     mediaId: String,
     title: String?,
     artist: String?,
+    artistIds: ArrayList<String>?,
+    albumId: String?,
     shouldBePlaying: Boolean,
     position: Long,
     duration: Long,
@@ -74,6 +78,10 @@ fun Controls(
     var scrubbingPosition by remember(mediaId) {
         mutableStateOf<Long?>(null)
     }
+
+    val onGoToArtistInfo = artistRoute::global
+    val onGoToAlbum = albumRoute::global
+
 
     var likedAt by rememberSaveable {
         mutableStateOf<Long?>(null)
@@ -91,34 +99,82 @@ fun Controls(
         targetValueByState = { if (it) 32.dp else 16.dp }
     )
 
+
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp)
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            IconButton(
+                icon = R.drawable.disc,
+                color = if (albumId == null) colorPalette.textDisabled else colorPalette.text,
+                enabled = if (albumId == null) false else true,
+                onClick = {
+                        onGoToAlbum(albumId)
+                },
+                modifier = Modifier
+                    .size(24.dp)
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .width(8.dp)
+            )
+
+            BasicText(
+                text = AnnotatedString(title ?: ""),
+                style = typography.l.semiBold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+        }
+
+        Spacer(
+            modifier = Modifier
+                .weight(0.4f)
+        )
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            artistIds?.distinct()?.forEach {
+                IconButton(
+                    icon = R.drawable.person,
+                    color = if (it == "") colorPalette.textDisabled else colorPalette.text,
+                    enabled = it != "",
+                    onClick = {
+                        onGoToArtistInfo(it)
+                    },
+                    modifier = Modifier
+                        .size(24.dp)
+                )
+
+                Spacer(
+                    modifier = Modifier
+                        .width(8.dp)
+                )
+            }
+
+            BasicText(
+                text = AnnotatedString(artist ?: ""),
+                style = typography.l.secondary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+
+            )
+
+        }
+
         Spacer(
             modifier = Modifier
                 .weight(1f)
-        )
-
-        BasicText(
-            text = title ?: "",
-            style = typography.l.bold,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-        BasicText(
-            text = artist ?: "",
-            style = typography.s.semiBold.secondary,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-        Spacer(
-            modifier = Modifier
-                .weight(0.5f)
         )
 
         SeekBar(
@@ -239,7 +295,7 @@ fun Controls(
                 Image(
                     painter = painterResource(if (shouldBePlaying) R.drawable.pause else R.drawable.play),
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorPalette.iconButtonPlayer),
+                    colorFilter = ColorFilter.tint(colorPalette.text),
                     modifier = Modifier
                         .align(Alignment.Center)
                         .size(28.dp)
