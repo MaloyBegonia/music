@@ -63,7 +63,7 @@ fun About() {
             title = stringResource(R.string.donate2),
             text = stringResource(R.string.donate),
             onClick = {
-                uriHandler.openUri("https://qiwi.com/n/FLOKISOFTPRIVAT")
+                uriHandler.openUri("https://yoomoney.ru/bill/pay/1110NN64476.240221")
             }
         )
 

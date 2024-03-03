@@ -180,7 +180,7 @@ fun ArtistScreen(browseId: String) {
                     Item(0, stringResource(R.string.overview), R.drawable.sparkles)
                     Item(1, stringResource(R.string.songs), R.drawable.musical_notes)
                     Item(2, stringResource(R.string.albums), R.drawable.disc)
-                    Item(3, stringResource(R.string.songs), R.drawable.disc)
+                    Item(3, stringResource(R.string.singles), R.drawable.disc)
                     Item(4, stringResource(R.string.library), R.drawable.library)
                 },
             ) { currentTabIndex ->

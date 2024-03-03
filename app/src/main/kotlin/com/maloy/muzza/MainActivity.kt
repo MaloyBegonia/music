@@ -52,6 +52,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.coerceIn
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
@@ -101,7 +102,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class MainActivity : ComponentActivity(), PersistMapOwner {
+
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             if (service is PlayerService.Binder) {
@@ -143,10 +146,10 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
                 stateSaver = Appearance.Companion
             ) {
                 with(preferences) {
-                    val colorPaletteName = getEnum(colorPaletteNameKey, ColorPaletteName.Dynamic)
+                    val colorPaletteName = getEnum(colorPaletteNameKey, ColorPaletteName.PureBlack)
                     val colorPaletteMode = getEnum(colorPaletteModeKey, ColorPaletteMode.System)
                     val thumbnailRoundness =
-                        getEnum(thumbnailRoundnessKey, ThumbnailRoundness.Light)
+                        getEnum(thumbnailRoundnessKey, ThumbnailRoundness.Heavy)
 
                     val useSystemFont = getBoolean(useSystemFontKey, false)
                     val applyFontPadding = getBoolean(applyFontPaddingKey, false)
@@ -245,7 +248,7 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
 
                             thumbnailRoundnessKey -> {
                                 val thumbnailRoundness =
-                                    sharedPreferences.getEnum(key, ThumbnailRoundness.Light)
+                                    sharedPreferences.getEnum(key, ThumbnailRoundness.Heavy)
 
                                 appearance = appearance.copy(
                                     thumbnailShape = thumbnailRoundness.shape()
@@ -266,7 +269,7 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
                 with(preferences) {
                     registerOnSharedPreferenceChangeListener(listener)
 
-                    val colorPaletteName = getEnum(colorPaletteNameKey, ColorPaletteName.Dynamic)
+                    val colorPaletteName = getEnum(colorPaletteNameKey, ColorPaletteName.PureBlack)
                     if (colorPaletteName == ColorPaletteName.Dynamic) {
                         setDynamicPalette(getEnum(colorPaletteModeKey, ColorPaletteMode.System))
                     }
@@ -407,15 +410,12 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
         onNewIntent(intent)
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        val uri = intent?.data ?: return
+        val uri = intent.getStringExtra("android.intent.extra.TEXT")?.toUri() ?: return
 
-        intent.data = null
-        this.intent = null
-
-        Toast.makeText(this, "Opening url...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${"Muzza "}${getString(R.string.opening_url)}", Toast.LENGTH_LONG).show()
 
         lifecycleScope.launch(Dispatchers.IO) {
             when (val path = uri.pathSegments.firstOrNull()) {
@@ -484,6 +484,7 @@ class MainActivity : ComponentActivity(), PersistMapOwner {
                 (if (isDark) Color.Transparent else Color.Black.copy(alpha = 0.2f)).toArgb()
         }
     }
+
 }
 
 val LocalPlayerServiceBinder = staticCompositionLocalOf<PlayerService.Binder?> { null }

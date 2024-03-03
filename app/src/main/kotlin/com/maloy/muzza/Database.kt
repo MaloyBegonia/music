@@ -35,6 +35,7 @@ import com.maloy.muzza.enums.AlbumSortBy
 import com.maloy.muzza.enums.ArtistSortBy
 import com.maloy.muzza.enums.PlaylistSortBy
 import com.maloy.muzza.enums.SongSortBy
+import com.maloy.muzza.enums.SongSortBy.*
 import com.maloy.muzza.enums.SortOrder
 import com.maloy.muzza.models.Album
 import com.maloy.muzza.models.Artist
@@ -92,18 +93,21 @@ interface Database {
 
     fun songs(sortBy: SongSortBy, sortOrder: SortOrder): Flow<List<Song>> {
         return when (sortBy) {
-            SongSortBy.PlayTime -> when (sortOrder) {
+            PlayTime -> when (sortOrder) {
                 SortOrder.Ascending -> songsByPlayTimeAsc()
                 SortOrder.Descending -> songsByPlayTimeDesc()
             }
-            SongSortBy.Title -> when (sortOrder) {
+            Title -> when (sortOrder) {
                 SortOrder.Ascending -> songsByTitleAsc()
                 SortOrder.Descending -> songsByTitleDesc()
             }
-            SongSortBy.DateAdded -> when (sortOrder) {
+            DateAdded -> when (sortOrder) {
                 SortOrder.Ascending -> songsByRowIdAsc()
                 SortOrder.Descending -> songsByRowIdDesc()
             }
+
+            DatePlayed -> TODO()
+            DateLiked -> TODO()
         }
     }
 

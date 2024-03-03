@@ -83,7 +83,6 @@ import com.maloy.muzza.utils.shuffleQueue
 import com.maloy.muzza.utils.smoothScrollToTop
 import com.maloy.muzza.utils.windows
 import kotlinx.coroutines.launch
-
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
@@ -182,12 +181,14 @@ fun Queue(
 
         val musicBarsTransition = updateTransition(targetState = mediaItemIndex, label = "")
 
+
         Column {
             Box(
                 modifier = Modifier
                     .background(colorPalette.background1)
                     .weight(1f)
             ) {
+
                 ReorderingLazyColumn(
                     reorderingState = reorderingState,
                     contentPadding = windowInsets
@@ -331,18 +332,6 @@ fun Queue(
                     .padding(horizontalBottomPaddingValues)
                     .height(64.dp)
             ) {
-                BasicText(
-                    text = "${binder.player.mediaItemCount} " + stringResource(R.string.songs), //+ " " + stringResource(R.string.on_queue),
-                    style = typography.xxs.medium,
-                    modifier = Modifier
-                        .background(
-                            color = colorPalette.background1,
-                            shape = RoundedCornerShape(16.dp)
-                        )
-                        .align(Alignment.CenterStart)
-                        .padding(all = 8.dp)
-                )
-
                 Image(
                     painter = painterResource(R.drawable.chevron_down),
                     contentDescription = null,
@@ -351,6 +340,36 @@ fun Queue(
                         .align(Alignment.Center)
                         .size(18.dp)
                 )
+
+                IconButton(
+                    icon = R.drawable.trash,
+                    color = colorPalette.text,
+                    onClick = {
+                        val mediacount = binder.player.mediaItemCount-1
+                        for (i in mediacount.downTo(0)) {
+                            if (i == mediaItemIndex) null else binder.player.removeMediaItem(i)
+                        }
+
+                    },
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(horizontal = 4.dp, vertical = 8.dp)
+                        .size(18.dp)
+                )
+
+                BasicText(
+                    text = "${binder.player.mediaItemCount} " + stringResource(R.string.songs) + " " + stringResource(R.string.on_queue),
+                    style = typography.xxs.medium,
+                    modifier = Modifier
+                        .background(
+                            color = colorPalette.background1,
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .align(Alignment.BottomCenter)
+
+                )
+
+
 
                 Row(
                     modifier = Modifier
@@ -361,9 +380,13 @@ fun Queue(
                         .align(Alignment.CenterEnd)
                         .animateContentSize()
                 ) {
-                    BasicText(
-                        text = stringResource(R.string.queue_loop),
-                        style = typography.xxs.medium,
+                    Image(
+                        painter = painterResource(R.drawable.infinite),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(colorPalette.text),
+                        modifier = Modifier
+                            .size(18.dp)
+
                     )
 
                     AnimatedContent(
@@ -378,7 +401,7 @@ fun Queue(
                         }
                     ) {
                         BasicText(
-                            text = if (it) stringResource(R.string.On) else stringResource(R.string.Off),
+                            text = if (it) " on" else " off",
                             style = typography.xxs.medium,
                         )
                     }
