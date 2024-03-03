@@ -15,11 +15,11 @@
     <string name="hide">Сховати</string>
     <string name="hide_from_quick_picks">Сховати від \"Quick picks\"</string>
     <string name="related_albums">Похожі альбоми</string>
-    <string name="similar_artists">Похожі артисти</string>
+    <string name="similar_artists">Похожі виконавці</string>
     <string name="playlists_you_might_like">Плейлисти, які можуть вам сподобатися</string>
     <string name="an_error_has_occurred">Виникла помилка</string>
     <string name="albums">Альбоми</string>
-    <string name="artists">Артисти</string>
+    <string name="artists">Виконавці</string>
     <string name="enter_the_playlist_name">Введіть назву плейлиста</string>
     <string name="playlists">Плейлисти</string>
     <string name="favorites">Обране</string>
@@ -163,7 +163,7 @@
     <string name="i18_none">Звичайний</string>
     <string name="i18_light">Середній</string>
     <string name="i18_heavy">Великий</string>
-    <string name="aboutdev">Muzza v1.9 Розробник @MaloyBegonia</string>
+    <string name="aboutdev">Muzza v2.0 Розробник @MaloyBegonia</string>
     <string name="git">GitHub</string>
     <string name="telegramchannel">Телеграм канал</string>
     <string name="donate2">Донат</string>
