@@ -12,7 +12,7 @@ android {
         minSdk = 21
         targetSdk = 33
         versionCode = 20
-        versionName = "1.9"
+        versionName = "2.0.1"
     }
 
     splits {
@@ -49,8 +49,8 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_10
-        targetCompatibility = JavaVersion.VERSION_1_10
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     composeOptions {
